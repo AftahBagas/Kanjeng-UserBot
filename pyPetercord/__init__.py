@@ -16,7 +16,7 @@ petercord.tgbot.version = __version__
 bot = petercord
 
 StartTime = time.time()
-catversion = "3.0.0"
+petercordversion = "3.0.0"
 
 if Config.UPSTREAM_REPO == "petercord":
     UPSTREAM_REPO_URL = "https://github.com/IlhamMansiez/PetercordBot"
