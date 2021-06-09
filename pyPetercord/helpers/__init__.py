@@ -13,7 +13,7 @@ while flag:
         from .progress import *
         from .qhelper import process
         from .tools import *
-        from .utils import _petercordtools, _petercordutils, _format
+        from .utils import _format, _petercordtools, _petercordutils
 
         break
     except ModuleNotFoundError as e:
