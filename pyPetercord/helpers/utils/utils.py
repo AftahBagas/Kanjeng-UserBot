@@ -34,13 +34,13 @@ def run_async(loop, coro):
     return asyncio.run_coroutine_threadsafe(coro, loop).result()
 
 
-async def unsavegif(event, ilha.):
+async def unsavegif(event, ilham):
     try:
         await event.client(
             functions.messages.SaveGifRequest(
                 id=types.InputDocument(
                     id=ilham.media.document.id,
-                    access_hash=ilha..media.document.access_hash,
+                    access_hash=ilham.media.document.access_hash,
                     file_reference=ilham.media.document.file_reference,
                 ),
                 unsave=True,
