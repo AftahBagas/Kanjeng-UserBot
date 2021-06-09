@@ -35,7 +35,7 @@ async def yt_search(petercord):
     try:
         petercord = urllib.parse.quote(petercord)
         html = urllib.request.urlopen(
-            "https://www.youtube.com/results?search_query=" + cat
+            "https://www.youtube.com/results?search_query=" + petercord
         )
         user_data = re.findall(r"watch\?v=(\S{11})", html.read().decode())
         video_link = []
