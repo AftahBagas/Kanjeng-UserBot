@@ -39,12 +39,17 @@ async def amireallyalive(event):
         petercord_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
         petercord_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
         petercord_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-        petercord_caption += f"**{EMOJI} PetercordBot Version :** `{petercordversion}`\n"
+        petercord_caption += (
+            f"**{EMOJI} PetercordBot Version :** `{petercordversion}`\n"
+        )
         petercord_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
         petercord_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
         petercord_caption += f"**{EMOJI} Master:** {mention}\n"
         await event.client.send_file(
-            event.chat_id, Config.ALIVE_PIC, caption=petercord_caption, reply_to=reply_to_id
+            event.chat_id,
+            Config.ALIVE_PIC,
+            caption=petercord_caption,
+            reply_to=reply_to_id,
         )
         await event.delete()
     else:
