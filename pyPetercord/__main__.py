@@ -55,7 +55,9 @@ async def testing_bot():
 def verifyLoggerGroup():
     if BOTLOG:
         try:
-            entity = petercord.loop.run_until_complete(petercord.get_entity(BOTLOG_CHATID))
+            entity = petercord.loop.run_until_complete(
+                petercord.get_entity(BOTLOG_CHATID)
+            )
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
                     LOGS.info(
@@ -153,7 +155,9 @@ async def startupmessage():
                 BOTLOG_CHATID,
                 "https://telegra.ph/file/83e407a78cecc0af8adc8.jpg",
                 caption="**Your PetercordBot has been started successfully.**",
-                buttons=[(Button.url("Support", "https://t.me/TEAMSquadUserbotSupport"),)],
+                buttons=[
+                    (Button.url("Support", "https://t.me/TEAMSquadUserbotSupport"),)
+                ],
             )
     except Exception as e:
         LOGS.error(e)
