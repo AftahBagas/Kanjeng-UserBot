@@ -15,7 +15,10 @@ class PetercordBroadcast(BASE):
         self.group_id = str(group_id)
 
     def __repr__(self):
-        return "<Petercord Broadcast channels '%s' for %s>" % (self.group_id, self.keywoard)
+        return "<Petercord Broadcast channels '%s' for %s>" % (
+            self.group_id,
+            self.keywoard,
+        )
 
     def __eq__(self, other):
         return bool(
@@ -49,7 +52,9 @@ def add_to_broadcastlist(keywoard, group_id):
 
 def rm_from_broadcastlist(keywoard, group_id):
     with PETERCORDBROADCAST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordBroadcast).get((keywoard, str(group_id)))
+        broadcast_group = SESSION.query(PetercordBroadcast).get(
+            (keywoard, str(group_id))
+        )
         if broadcast_group:
             if str(group_id) in BROADCAST_SQL_.BROADCAST_CHANNELS.get(keywoard, set()):
                 BROADCAST_SQL_.BROADCAST_CHANNELS.get(keywoard, set()).remove(
@@ -66,7 +71,9 @@ def rm_from_broadcastlist(keywoard, group_id):
 
 def is_in_broadcastlist(keywoard, group_id):
     with PETERCORDBROADCAST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordBroadcast).get((keywoard, str(group_id)))
+        broadcast_group = SESSION.query(PetercordBroadcast).get(
+            (keywoard, str(group_id))
+        )
         return bool(broadcast_group)
 
 
