@@ -82,7 +82,7 @@ def remove_plugin(shortname):
         LOGS.error(e)
     try:
         for i in LOAD_PLUG[shortname]:
-            catub.remove_event_handler(i)
+            petercord.remove_event_handler(i)
         del LOAD_PLUG[shortname]
     except BaseException:
         pass
