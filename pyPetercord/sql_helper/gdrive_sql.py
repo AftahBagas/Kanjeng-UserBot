@@ -1,4 +1,4 @@
-#PetercordBot
+# PetercordBot
 from sqlalchemy import Column, String
 
 from . import BASE, SESSION
