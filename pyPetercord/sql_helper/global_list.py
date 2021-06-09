@@ -19,7 +19,7 @@ class PetercordGloballist(BASE):
 
     def __eq__(self, other):
         return bool(
-            isinstance(other, CatGloballist)
+            isinstance(other, PetercordGloballist)
             and self.keywoard == other.keywoard
             and self.group_id == other.group_id
         )
