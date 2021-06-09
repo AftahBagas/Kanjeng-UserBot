@@ -39,7 +39,7 @@ GLOBALLIST_SQL_ = GLOBALLIST_SQL()
 
 
 def add_to_list(keywoard, group_id):
-    with CATGLOBALLIST_INSERTION_LOCK:
+    with PETERCORDGLOBALLIST_INSERTION_LOCK:
         broadcast_group = PetercordGloballist(keywoard, str(group_id))
         SESSION.merge(broadcast_group)
         SESSION.commit()
@@ -48,9 +48,7 @@ def add_to_list(keywoard, group_id):
 
 def rm_from_list(keywoard, group_id):
     with PETERCORDGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordGloballist).get(
-            (keywoard, str(group_id))
-        )
+        broadcast_group = SESSION.query(PetercordGloballist).get((keywoard, str(group_id)))
         if broadcast_group:
             if str(group_id) in GLOBALLIST_SQL_.GLOBALLIST_VALUES.get(keywoard, set()):
                 GLOBALLIST_SQL_.GLOBALLIST_VALUES.get(keywoard, set()).remove(
@@ -66,9 +64,7 @@ def rm_from_list(keywoard, group_id):
 
 def is_in_list(keywoard, group_id):
     with PETERCORDGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordGloballist).get(
-            (keywoard, str(group_id))
-        )
+        broadcast_group = SESSION.query(PetercordGloballist).get((keywoard, str(group_id)))
         return bool(broadcast_group)
 
 
@@ -105,7 +101,7 @@ def num_list():
 def num_list_keyword(keywoard):
     try:
         return (
-            SESSION.query(CatGloballist.keywoard)
+            SESSION.query(PetercordGloballist.keywoard)
             .filter(PetercordGloballist.keywoard == keywoard)
             .count()
         )
@@ -115,9 +111,7 @@ def num_list_keyword(keywoard):
 
 def num_list_keywords():
     try:
-        return SESSION.query(
-            func.count(distinct(PetercordGloballist.keywoard))
-        ).scalar()
+        return SESSION.query(func.count(distinct(PetercordGloballist.keywoard))).scalar()
     finally:
         SESSION.close()
 
