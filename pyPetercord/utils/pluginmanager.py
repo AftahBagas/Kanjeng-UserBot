@@ -19,7 +19,7 @@ from ..helpers.utils import (
 )
 from .decorators import admin_cmd, sudo_cmd
 
-LOGS = logging.getLogger("CatUserbot")
+LOGS = logging.getLogger("PetercordBot")
 
 
 def load_module(shortname, plugin_path=None):
@@ -35,7 +35,7 @@ def load_module(shortname, plugin_path=None):
     else:
         if plugin_path is None:
             path = Path(f"pyPetercord/plugins/{shortname}.py")
-            name = f"userbot.plugins.{shortname}"
+            name = f"pyPetercord.plugins.{shortname}"
         else:
             path = Path((f"{plugin_path}/{shortname}.py"))
             name = f"{plugin_path}/{shortname}".replace("/", ".")
