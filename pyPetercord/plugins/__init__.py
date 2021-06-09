@@ -24,7 +24,7 @@ from ..helpers.utils import (
 )
 
 # =================== CONSTANT ===================
-bot = catub
+bot = petercord
 LOGS = logging.getLogger(__name__)
 USERID = petercord.uid if Config.OWNER_ID == 0 else Config.OWNER_ID
 ALIVE_NAME = Config.ALIVE_NAME
