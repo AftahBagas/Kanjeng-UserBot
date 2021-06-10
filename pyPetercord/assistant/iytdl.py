@@ -64,7 +64,9 @@ async def iytdl_inline(event):
         input_url = (reply.text).strip()
     if not input_url:
         return await edit_delete(event, "Give input or reply to a valid youtube URL")
-    petercordevent = await edit_or_reply(event, f"🔎 Searching Youtube for: `'{input_url}'`")
+    petercordevent = await edit_or_reply(
+        event, f"🔎 Searching Youtube for: `'{input_url}'`"
+    )
     results = await event.client.inline_query(
         Config.TG_BOT_USERNAME, f"ytdl {input_url}"
     )
