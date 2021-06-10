@@ -78,7 +78,7 @@ async def get_user_from_event(
     return None, None
 
 
-async def checking(catub):
+async def checking(petercord):
     petercord_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
         petercord_channel = Get(petercord_c)
