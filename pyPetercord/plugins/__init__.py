@@ -18,7 +18,7 @@ from ..helpers import *
 from ..helpers.utils import (
     _format,
     _petercordutils,
-    _petetcordtools,
+    _petercordtools,
     install_pip,
     reply_id,
 )
