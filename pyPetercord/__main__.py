@@ -78,7 +78,7 @@ def verifyLoggerGroup():
             )
         try:
             entity = petercord.loop.run_until_complete(
-                catub.get_entity(Config.PM_LOGGER_GROUP_ID)
+                petercord.get_entity(Config.PM_LOGGER_GROUP_ID)
             )
             if not isinstance(entity, types.User) and not entity.creator:
                 if entity.default_banned_rights.send_messages:
