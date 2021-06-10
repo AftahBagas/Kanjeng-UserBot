@@ -4,22 +4,22 @@ import heroku3
 
 from .Config import Config
 from .core import logger
-from .core.session import petercord
+from .core.session import kanjeng
 
 __version__ = "3.0.0"
 __license__ = "GNU Affero General Public License v3.0"
-__author__ = "PetercordBot <https://github.com/IlhamMansiez/PetercordBot>"
-__copyright__ = "PetercordBot Copyright (C) 2020 - 2021  " + __author__
+__author__ = "KanjengBot <https://github.com/AftahBagas/Kanjeng-Userbot>"
+__copyright__ = "KanjengBot Copyright (C) 2020 - 2021  " + __author__
 
-petercord.version = __version__
-petercord.tgbot.version = __version__
-bot = petercord
+kanjeng.version = __version__
+kanjeng.tgbot.version = __version__
+bot = kanjeng
 
 StartTime = time.time()
-petercordversion = "3.0.0"
+kanjengversion = "3.0.0"
 
-if Config.UPSTREAM_REPO == "petercord":
-    UPSTREAM_REPO_URL = "https://github.com/IlhamMansiez/PetercordBot"
+if Config.UPSTREAM_REPO == "Kanjeng-Userbot":
+    UPSTREAM_REPO_URL = "https://github.com/AftahBagas/Kanjeng-Userbot"
 else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
