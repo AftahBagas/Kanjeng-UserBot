@@ -56,9 +56,9 @@ async def media_to_pic(event, reply, noedits=False):
             petercordmedia = await reply.download_media(file="./temp")
             clip = VideoFileClip(media)
             try:
-                clip = clip.save_frame(catfile, 0.1)
+                clip = clip.save_frame(petercordfile, 0.1)
             except:
-                clip = clip.save_frame(catfile, 0)
+                clip = clip.save_frame(petercordfile, 0)
     elif mediatype == "Document":
         mimetype = reply.document.mime_type
         mtype = mimetype.split("/")
@@ -70,7 +70,7 @@ async def media_to_pic(event, reply, noedits=False):
         os.remove(petercordmedia)
     if os.path.exists(petercordfile):
         return petercordevent, petercordfile, mediatype
-    return catevent, None
+    return petercordevent, None
 
 
 async def take_screen_shot(
