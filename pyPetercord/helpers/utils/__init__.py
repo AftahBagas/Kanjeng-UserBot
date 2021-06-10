@@ -5,7 +5,7 @@ check = 0
 while flag:
     try:
         from . import format as _format
-        from . import tools as _petercordtools
+        from . import tools as _petetcordtools
         from . import utils as _petercordutils
         from .events import *
         from .format import htmlmentionuser, mentionuser, parse_pre
