@@ -252,13 +252,13 @@ async def inline_handler(event):  # sourcery no-metrics
             elif PETERCORD_IMG:
                 result = builder.document(
                     PETERCORD_IMG,
-                    title="Alive cat",
+                    title="Alive petercord",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive cat",
+                    title="Alive petercord",
                     text=query,
                     buttons=buttons,
                 )
@@ -311,12 +311,12 @@ async def inline_handler(event):  # sourcery no-metrics
                 try:
                     u = await event.client.get_entity(u)
                     if u.username:
-                        sandy = f"@{u.username}"
+                        ilham = f"@{u.username}"
                     else:
-                        sandy = f"[{u.first_name}](tg://user?id={u.id})"
+                        ilham = f"[{u.first_name}](tg://user?id={u.id})"
                 except ValueError:
                     # ValueError: Could not find the input entity
-                    sandy = f"[user](tg://user?id={u})"
+                    ilham = f"[user](tg://user?id={u})"
             except ValueError:
                 # if u is username
                 try:
@@ -324,9 +324,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 except ValueError:
                     return
                 if u.username:
-                    sandy = f"@{u.username}"
+                    ilham = f"@{u.username}"
                 else:
-                    sandy = f"[{u.first_name}](tg://user?id={u.id})"
+                    ilham = f"[{u.first_name}](tg://user?id={u.id})"
                 u = int(u.id)
             except Exception:
                 return
@@ -336,7 +336,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 A whisper message to {sandy}, Only he/she can open it.",
+                text=f"🔒 A whisper message to {ilham}, Only he/she can open it.",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
