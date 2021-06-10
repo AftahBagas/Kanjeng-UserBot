@@ -9,7 +9,7 @@ from pyPetercord import StartTime, petercord, petercordversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from ..helpers.functions import catalive, check_data_base_heal_th, get_readable_time
+from ..helpers.functions import petercordalive, check_data_base_heal_th, get_readable_time
 from ..helpers.utils import reply_id
 from . import mention
 
@@ -81,15 +81,15 @@ async def amireallyalive(event):
     reply_to_id = await reply_id(event)
     petercord_caption = f"**PetercordBot is Up and Running**\n"
     petercord_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-    petercord_caption += f"**{EMOJI} Catuserbot Version :** `{catversion}`\n"
+    petercord_caption += f"**{EMOJI} PetercordBot Version :** `{petercordversion}`\n"
     petercord_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
     petercord_caption += f"**{EMOJI} Master:** {mention}\n"
-    results = await event.client.inline_query(Config.TG_BOT_USERNAME, cat_caption)
+    results = await event.client.inline_query(Config.TG_BOT_USERNAME, petercord_caption)
     await results[0].click(event.chat_id, reply_to=reply_to_id, hide_via=True)
     await event.delete()
 
 
 @petercord.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
 async def on_plug_in_callback_query_handler(event):
-    statstext = await catalive(StartTime)
+    statstext = await petercordalive(StartTime)
     await event.answer(statstext, cache_time=0, alert=True)
