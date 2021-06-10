@@ -1,4 +1,4 @@
-# PetercordBot
+# Kanjengingsun
 
 import os
 from typing import Set
@@ -27,7 +27,7 @@ class Config(object):
     TZ = os.environ.get("TZ", "Asia/Jakarta")
     # set this with required cat repo link
     UPSTREAM_REPO = os.environ.get(
-        "UPSTREAM_REPO", "https://github.com/IlhamMansiez/PetercordBot.git"
+        "UPSTREAM_REPO", "https://github.com/AftahBagas/Kanjeng-Userbot.git"
     )
 
     # BASIC and MAIN CONFIG VARS
@@ -61,10 +61,10 @@ class Config(object):
     CUSTOM_ALIVE_TEXT = os.environ.get("CUSTOM_ALIVE_TEXT", None)
     CUSTOM_ALIVE_EMOJI = os.environ.get("CUSTOM_ALIVE_EMOJI", None)
     # set this value with your required name for telegraph plugin
-    TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "PetercordBot")
+    TELEGRAPH_SHORT_NAME = os.environ.get("TELEGRAPH_SHORT_NAME", "Kanjeng")
     # for custom thumb image set this with your required thumb telegraoh link
     THUMB_IMAGE = os.environ.get(
-        "THUMB_IMAGE", "https://telegra.ph/file/83e407a78cecc0af8adc8.jpg"
+        "THUMB_IMAGE", "https://telegra.ph/file/95c9129cdf77386baf440.jpg"
     )
     # set blacklist_chats where you do not want userbot's features
     UB_BLACK_LIST_CHAT = {
@@ -127,7 +127,7 @@ class Config(object):
     GENIUS_API_TOKEN = os.environ.get("GENIUS_API_TOKEN", None)
     # Get your own API key from https://www.remove.bg/
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
-    # Google Drive plugin https://telegra.ph/G-Drive-guide-for-catuserbot-01-01
+    # Google Drive plugin https://telegra.ph/G-Drive-guide-for-kanjeng-userbot-01-01
     G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
     G_DRIVE_CLIENT_SECRET = os.environ.get("G_DRIVE_CLIENT_SECRET", None)
     G_DRIVE_FOLDER_ID = os.environ.get("G_DRIVE_FOLDER_ID", None)
@@ -175,7 +175,7 @@ class Config(object):
     COUNTRY = str(os.environ.get("COUNTRY", ""))
     TZ_NUMBER = int(os.environ.get("TZ_NUMBER", 1))
     # For updater plugin
-    UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "master")
+    UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "Kanjeng")
     # dont touch this at all
     SUDO_USERS: Set[int] = set()
     CATUBLOGO = None
