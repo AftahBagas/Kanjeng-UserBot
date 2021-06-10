@@ -145,7 +145,7 @@ async def cmdlist():
     },
 )
 async def _(event):
-    "To get guide for catuserbot."
+    "To get guide for petercorduserbot."
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
