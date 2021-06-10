@@ -1,7 +1,7 @@
 FROM  ilhammansiz17/ilham-mansiez-petercord:Petercord-Userbot
 
 #clonning repo 
-RUN git clone https://github.com/IlhamMansiez/PetercordBot.git /root/userbot
+RUN git clone https://github.com/AftahBagas/Kanjeng-Userbot.git /root/userbot
 #working directory 
 WORKDIR /root/userbot
 
