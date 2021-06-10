@@ -5,7 +5,7 @@ from platform import python_version
 from telethon import version
 from telethon.events import CallbackQuery
 
-from pyPetercord import StartTime, petercordversion
+from pyPetercord import StartTime, petercord, petercordversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
