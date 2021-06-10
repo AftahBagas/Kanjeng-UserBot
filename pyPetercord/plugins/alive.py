@@ -9,7 +9,11 @@ from pyPetercord import StartTime, petercord, petercordversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from ..helpers.functions import petercordalive, check_data_base_heal_th, get_readable_time
+from ..helpers.functions import (
+    check_data_base_heal_th,
+    get_readable_time,
+    petercordalive,
+)
 from ..helpers.utils import reply_id
 from . import mention
 
