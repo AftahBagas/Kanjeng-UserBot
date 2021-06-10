@@ -48,7 +48,7 @@ async def media_to_pic(event, reply, noedits=False):
                 f"lottie_convert.py --frame 0 -if lottie -of png '{petercordmedia}' '{petercordfile}'"
             )
         elif petercordmedia.endswith(".webp"):
-            im = Image.open(catmedia)
+            im = Image.open(petercordmedia)
             im.save(petercordfile)
     elif mediatype in ["Round Video", "Video", "Gif"]:
         await event.client.download_media(reply, petercordfile, thumb=-1)
