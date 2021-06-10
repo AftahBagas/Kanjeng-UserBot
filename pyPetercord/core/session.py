@@ -16,7 +16,7 @@ else:
     session = "petercorduserbot"
 
 try:
-    catub = PetercordBotClient(
+    petercord = PetercordBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
