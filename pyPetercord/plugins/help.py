@@ -101,8 +101,8 @@ async def grpinfo():
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     for cat in category:
-        plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} **({len(plugins)})\n"
+        plugins = GRP_INFO[petercord]
+        outstr += f"**{hemojis[petercord]} {petercord.title()} **({len(plugins)})\n"
         for plugin in plugins:
             outstr += f"`{plugin}`  "
         outstr += "\n\n"
@@ -110,11 +110,11 @@ async def grpinfo():
 
 
 async def cmdlist():
-    outstr = "**Total list of Commands in your Catuserbot are :**\n\n"
+    outstr = "**Total list of Commands in your PetercordBot are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
-    for cat in category:
+    for petercord in category:
         plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[cat]} {cat.title()} ** - {len(plugins)}\n\n"
+        outstr += f"**{hemojis[petercord]} {petercord.title()} ** - {len(plugins)}\n\n"
         for plugin in plugins:
             cmds = PLG_INFO[plugin]
             outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"
