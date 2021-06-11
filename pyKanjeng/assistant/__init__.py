@@ -1,4 +1,4 @@
-from pyPetercord import petercord
+from pyKanjeng import kanjeng
 
 from ..Config import Config
 from ..core.inlinebot import *
