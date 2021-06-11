@@ -17,7 +17,9 @@ from ..helpers.functions import (
 from ..helpers.utils import reply_id
 from . import mention
 
-CUSTOM_ALIVE_TEXT = Config.CUSTOM_ALIVE_TEXT or "✮ KANJENG USERBOT IS RUNNING SUCCESSFULLY ✮"
+CUSTOM_ALIVE_TEXT = (
+    Config.CUSTOM_ALIVE_TEXT or "✮ KANJENG USERBOT IS RUNNING SUCCESSFULLY ✮"
+)
 EMOJI = Config.CUSTOM_ALIVE_EMOJI or " 🔸 "
 
 plugin_category = "utils"
@@ -43,9 +45,7 @@ async def amireallyalive(event):
         kanjeng_caption = f"**{CUSTOM_ALIVE_TEXT}**\n\n"
         kanjeng_caption += f"**{EMOJI} Database :** `{check_sgnirts}`\n"
         kanjeng_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
-        kanjeng_caption += (
-            f"**{EMOJI} Kanjeng Version :** `{kanjengversion}`\n"
-        )
+        kanjeng_caption += f"**{EMOJI} Kanjeng Version :** `{kanjengversion}`\n"
         kanjeng_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
         kanjeng_caption += f"**{EMOJI} Uptime :** `{uptime}\n`"
         kanjeng_caption += f"**{EMOJI} Kanjeng:** {mention}\n"
