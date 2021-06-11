@@ -9,11 +9,7 @@ from pyKanjeng import StartTime, kanjeng, kanjengversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from ..helpers.functions import (
-    check_data_base_heal_th,
-    get_readable_time,
-    petercordalive,
-)
+from ..helpers.functions import check_data_base_heal_th, get_readable_time
 from ..helpers.utils import reply_id
 from . import mention
 
