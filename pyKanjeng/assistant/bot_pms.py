@@ -8,7 +8,7 @@ from telethon.errors import UserIsBlockedError
 from telethon.events import CallbackQuery, StopPropagation
 from telethon.utils import get_display_name
 
-from pyPetercord import Config, petercord
+from pyKanjeng import Config, kanjeng
 
 from ..core import check_owner, pool
 from ..core.logger import logging
@@ -48,12 +48,12 @@ async def check_bot_started_users(user, event):
     check = get_starter_details(user.id)
     if check is None:
         start_date = str(datetime.now().strftime("%B %d, %Y"))
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has started me.\
+        notification = f"🤵 {_format.mentionuser(user.first_name , user.id)} has started me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     else:
         start_date = check.date
-        notification = f"👤 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
+        notification = f"🤵 {_format.mentionuser(user.first_name , user.id)} has restarted me.\
                 \n**ID: **`{user.id}`\
                 \n**Name: **{get_display_name(user)}"
     try:
@@ -64,7 +64,7 @@ async def check_bot_started_users(user, event):
         await event.client.send_message(BOTLOG_CHATID, notification)
 
 
-@petercord.bot_cmd(
+@kanjeng.bot_cmd(
     pattern=f"^/start({botusername})?([\s]+)?$",
     incoming=True,
     func=lambda e: e.is_private,
@@ -79,18 +79,18 @@ async def bot_start(event):
         start_msg = f"Hey! 👤{_format.mentionuser(chat.first_name , chat.id)},\
                     \nI am {_format.mentionuser(user.first_name , user.id)}'s assistant bot.\
                     \nYou can contact to my master from here.\
-                    \n\nPowered by [PetercordBot](https://t.me/diemmmmmmmmmm)"
+                    \n\nPowered by [Kanjeng Kulo](https://t.me/kanjengingsun)"
         buttons = [
             (
-                Button.url("Repo", "https://github.com/IlhamMansiez/PetercordBot"),
+                Button.url("Repo", "https://github.com/AftahBagas/Kanjeng-Userbot"),
                 Button.url(
                     "Deploy",
-                    "https://heroku.com/deploy?template=https://github.com/IlhamMansiez/PETERCORDBOT_",
+                    "https://heroku.com/deploy?template=https://github.com/AftahBagas/deploykanjeng",
                 ),
             )
         ]
     else:
-        start_msg = "Hey Master!\
+        start_msg = "halo kanjeng!\
             \nHow can i help you ?"
         buttons = None
     try:
@@ -112,7 +112,7 @@ async def bot_start(event):
         await check_bot_started_users(chat, event)
 
 
-@petercord.bot_cmd(incoming=True, func=lambda e: e.is_private)
+@kanjeng.bot_cmd(incoming=True, func=lambda e: e.is_private)
 async def bot_pms(event):  # sourcery no-metrics
     chat = await event.get_chat()
     if check_is_black_list(chat.id):
@@ -169,7 +169,7 @@ async def bot_pms(event):  # sourcery no-metrics
                     )
 
 
-@petercord.bot_cmd(edited=True)
+@kanjeng.bot_cmd(edited=True)
 async def bot_pms_edit(event):  # sourcery no-metrics
     chat = await event.get_chat()
     if check_is_black_list(chat.id):
@@ -258,7 +258,7 @@ async def handler(event):
                 LOGS.error(str(e))
 
 
-@petercord.bot_cmd(
+@kanjeng.bot_cmd(
     pattern=f"^/uinfo$",
     from_users=Config.OWNER_ID,
 )
@@ -311,7 +311,7 @@ async def send_flood_alert(user_) -> None:
             FloodConfig.ALERT[user_.id]["count"] = 1
         except Exception as e:
             if BOTLOG:
-                await petercord.tgbot.send_message(
+                await kanjeng.tgbot.send_message(
                     BOTLOG_CHATID, f"**Error:**\nWhile updating flood count\n`{str(e)}`"
                 )
         flood_count = FloodConfig.ALERT[user_.id]["count"]
@@ -336,7 +336,7 @@ async def send_flood_alert(user_) -> None:
                     "Is Flooding your bot !, Check `.help delsudo` to remove the user from Sudo."
                 )
                 if BOTLOG:
-                    await petercord.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
+                    await kanjeng.tgbot.send_message(BOTLOG_CHATID, sudo_spam)
             else:
                 await ban_user_from_bot(
                     user_,
@@ -350,7 +350,7 @@ async def send_flood_alert(user_) -> None:
         if not fa_id:
             return
         try:
-            msg_ = await petercord.tgbot.get_messages(BOTLOG_CHATID, fa_id)
+            msg_ = await kanjeng.tgbot.get_messages(BOTLOG_CHATID, fa_id)
             if msg_.text != flood_msg:
                 await msg_.edit(flood_msg, buttons=buttons)
         except Exception as fa_id_err:
@@ -358,32 +358,32 @@ async def send_flood_alert(user_) -> None:
             return
     else:
         if BOTLOG:
-            fa_msg = await petercord.tgbot.send_message(
+            fa_msg = await kanjeng.tgbot.send_message(
                 BOTLOG_CHATID,
                 flood_msg,
                 buttons=buttons,
             )
         try:
-            chat = await petercord.tgbot.get_entity(BOTLOG_CHATID)
-            await petercord.tgbot.send_message(
+            chat = await kanjeng.tgbot.get_entity(BOTLOG_CHATID)
+            await kanjeng.tgbot.send_message(
                 Config.OWNER_ID,
                 f"⚠️  **[Bot Flood Warning !](https://t.me/c/{chat.id}/{fa_msg.id})**",
             )
         except UserIsBlockedError:
             if BOTLOG:
-                await petercord.tgbot.send_message(
+                await kanjeng.tgbot.send_message(
                     BOTLOG_CHATID, "**Unblock your bot !**"
                 )
     if FloodConfig.ALERT[user_.id].get("fa_id") is None and fa_msg:
         FloodConfig.ALERT[user_.id]["fa_id"] = fa_msg.id
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"bot_pm_ban_([0-9]+)")))
 @check_owner
 async def bot_pm_ban_cb(c_q: CallbackQuery):
     user_id = int(c_q.pattern_match.group(1))
     try:
-        user = await catub.get_entity(user_id)
+        user = await kanjengub.get_entity(user_id)
     except Exception as e:
         await c_q.answer(f"Error:\n{str(e)}")
     else:
@@ -420,7 +420,7 @@ def is_flood(uid: int) -> Optional[bool]:
         return True
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"toggle_bot-antiflood_off$")))
 @check_owner
 async def settings_toggle(c_q: CallbackQuery):
     if gvarstatus("bot_antif") is None:
@@ -430,8 +430,8 @@ async def settings_toggle(c_q: CallbackQuery):
     await c_q.edit("BOT_ANTIFLOOD is now disabled !")
 
 
-@petercord.bot_cmd(incoming=True, func=lambda e: e.is_private)
-@petercord.bot_cmd(edited=True, func=lambda e: e.is_private)
+@kanjeng.bot_cmd(incoming=True, func=lambda e: e.is_private)
+@kanjeng.bot_cmd(edited=True, func=lambda e: e.is_private)
 async def antif_on_msg(event):
     if gvarstatus("bot_antif") is None:
         return
