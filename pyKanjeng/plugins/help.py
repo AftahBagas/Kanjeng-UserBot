@@ -129,7 +129,7 @@ async def cmdlist():
     pattern="help ?(-c|-p|-t)? ?(.*)?",
     command=("help", plugin_category),
     info={
-        "header": "To get guide for catuserbot.",
+        "header": "To get guide for kanjeng userbot.",
         "description": "To get information or guide for the command or plugin",
         "note": "if command name and plugin name is same then you get guide for plugin. So by using this flag you get command guide",
         "flags": {
@@ -145,7 +145,7 @@ async def cmdlist():
     },
 )
 async def _(event):
-    "To get guide for petercorduserbot."
+    "To get guide for kanjeng userbot."
     flag = event.pattern_match.group(1)
     input_str = event.pattern_match.group(2)
     reply_to_id = await reply_id(event)
