@@ -1,6 +1,6 @@
 from telethon import functions
 
-from pyPetercord import petercord
+from pyKanjeng import kanjeng
 
 from ..Config import Config
 from ..core import CMD_INFO, GRP_INFO, PLG_INFO
@@ -12,13 +12,13 @@ cmdprefix = Config.COMMAND_HAND_LER
 plugin_category = "tools"
 
 hemojis = {
-    "admin": "👮‍♂️",
-    "bot": "🤖",
-    "fun": "🎨",
-    "misc": "🧩",
-    "tools": "🧰",
-    "utils": "🗂",
-    "extra": "➕",
+    "admin": "💌",
+    "bot": "💌",
+    "fun": "💌",
+    "misc": "💌",
+    "tools": "💌",
+    "utils": "💌",
+    "extra": "💌",
 }
 
 
@@ -97,12 +97,12 @@ async def plugininfo(input_str, event, flag):
 
 
 async def grpinfo():
-    outstr = "**Plugins in PetercordBot are:**\n\n"
+    outstr = "**Plugins in Kanjeng Userbot are:**\n\n"
     outstr += f"**👩‍💻 Usage : ** `{cmdprefix}help <plugin name>`\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     for cat in category:
-        plugins = GRP_INFO[petercord]
-        outstr += f"**{hemojis[petercord]} {petercord.title()} **({len(plugins)})\n"
+        plugins = GRP_INFO[kanjeng]
+        outstr += f"**{hemojis[kanjeng]} {kanjeng.title()} **({len(plugins)})\n"
         for plugin in plugins:
             outstr += f"`{plugin}`  "
         outstr += "\n\n"
@@ -110,11 +110,11 @@ async def grpinfo():
 
 
 async def cmdlist():
-    outstr = "**Total list of Commands in your PetercordBot are :**\n\n"
+    outstr = "**Total list of Commands in your Kanjeng Userbot are :**\n\n"
     category = ["admin", "bot", "fun", "misc", "tools", "utils", "extra"]
     for petercord in category:
         plugins = GRP_INFO[cat]
-        outstr += f"**{hemojis[petercord]} {petercord.title()} ** - {len(plugins)}\n\n"
+        outstr += f"**{hemojis[kanjeng]} {kanjeng.title()} ** - {len(plugins)}\n\n"
         for plugin in plugins:
             cmds = PLG_INFO[plugin]
             outstr += f"• **{plugin.title()} has {len(cmds)} commands**\n"
@@ -125,7 +125,7 @@ async def cmdlist():
     return outstr
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern="help ?(-c|-p|-t)? ?(.*)?",
     command=("help", plugin_category),
     info={
@@ -168,7 +168,7 @@ async def _(event):
     await edit_or_reply(event, outstr)
 
 
-@petercord.ilham_cmd(
+@kanjang.alfareza_cmd(
     pattern="cmds(?: |$)(.*)",
     command=("cmds", plugin_category),
     info={
@@ -201,7 +201,7 @@ async def _(event):
     )
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern="s (.*)",
     command=("s", plugin_category),
     info={
@@ -222,7 +222,7 @@ async def _(event):
     await edit_or_reply(event, out)
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern="dc$",
     command=("dc", plugin_category),
     info={
