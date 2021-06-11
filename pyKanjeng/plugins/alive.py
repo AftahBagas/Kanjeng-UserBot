@@ -52,7 +52,7 @@ async def amireallyalive(event):
         await event.client.send_file(
             event.chat_id,
             Config.ALIVE_PIC,
-            caption=petercord_caption,
+            caption=kanjeng_caption,
             reply_to=reply_to_id,
         )
         await event.delete()
@@ -95,5 +95,5 @@ async def amireallyalive(event):
 
 @kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"stats")))
 async def on_plug_in_callback_query_handler(event):
-    statstext = await petercordalive(StartTime)
+    statstext = await kanjengalive(StartTime)
     await event.answer(statstext, cache_time=0, alert=True)
