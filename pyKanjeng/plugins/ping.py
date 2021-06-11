@@ -1,14 +1,13 @@
 import asyncio
 from datetime import datetime
 
-from pyPetercord import petercord
-
 from ..core.managers import edit_or_reply
+from . import kanjeng, hmention
 
 plugin_category = "tools"
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern="ping( -a|$)",
     command=("ping", plugin_category),
     info={
@@ -22,23 +21,26 @@ async def _(event):
     flag = event.pattern_match.group(1)
     start = datetime.now()
     if flag == " -a":
-        petercordevent = await edit_or_reply(event, "`!....`")
+        kanjengevent = await edit_or_reply(event, "`!....`")
         await asyncio.sleep(0.3)
-        await petercordevent.edit("`..!..`")
+        await kanjengevent.edit("`..!..`")
         await asyncio.sleep(0.3)
-        await petercordevent.edit("`....!`")
+        await kanjengevent.edit("`....!`")
         end = datetime.now()
         tms = (end - start).microseconds / 1000
         ms = round((tms - 0.6) / 3, 3)
-        await petercordevent.edit(f"Average Pong!\n`{ms} ms`")
+        await kanjengevent.edit(f"**☞ Average Pong!**\n➥ {ms} ms")
     else:
-        petercordevent = await edit_or_reply(event, "Pong!")
+        kanjengevent = await edit_or_reply(event, "<b><i>☞ Pong!</b></i>", "html")
         end = datetime.now()
         ms = (end - start).microseconds / 1000
-        await petercordevent.edit(f"Pong!\n`{ms} ms`")
+        await kanjengevent.edit(
+            f"<b><i>☞ Alpha 🤖</b></i>\n➥ Pong {ms} <b><i>ms\n➥ Bot of {hmention}</b></i>",
+            parse_mode="html",
+        )
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern="fping$",
     command=("fping", plugin_category),
     info={"header": "Shows the server ping with extra animation", "usage": "{tr}fping"},
