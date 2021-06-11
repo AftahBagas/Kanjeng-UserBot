@@ -9,7 +9,11 @@ from pyKanjeng import StartTime, kanjeng, kanjengversion
 
 from ..Config import Config
 from ..core.managers import edit_or_reply
-from ..helpers.functions import check_data_base_heal_th, get_readable_time
+from ..helpers.functions import (
+    check_data_base_heal_th,
+    get_readable_time,
+    petercordalive,
+)
 from ..helpers.utils import reply_id
 from . import mention
 
@@ -79,7 +83,7 @@ async def amireallyalive(event):
 async def amireallyalive(event):
     "A kind of showing bot details by your inline bot"
     reply_to_id = await reply_id(event)
-    kanjeng_caption = f"**PetercordBot is Up and Running**\n"
+    kanjeng_caption = f"**Kanjeng Userbot is Up and Running**\n"
     kanjeng_caption += f"**{EMOJI} Telethon version :** `{version.__version__}\n`"
     kanjeng_caption += f"**{EMOJI} Kanjeng Version :** `{kanjengversion}`\n"
     kanjeng_caption += f"**{EMOJI} Python Version :** `{python_version()}\n`"
