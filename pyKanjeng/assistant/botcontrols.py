@@ -3,7 +3,7 @@ from datetime import datetime
 
 from telethon.errors import BadRequestError, FloodWaitError, ForbiddenError
 
-from pyPetercord import petercord
+from pyKanjeng import kanjeng
 
 from ..Config import Config
 from ..core.logger import logging
@@ -27,7 +27,7 @@ plugin_category = "bot"
 botusername = Config.TG_BOT_USERNAME
 
 
-@petercord.bot_cmd(
+@kanjeng.bot_cmd(
     pattern=f"^/broadcast$",
     from_users=Config.OWNER_ID,
 )
@@ -85,7 +85,7 @@ async def bot_broadcast(event):
     await br_cast.edit(b_info, parse_mode="html")
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern=f"bot_users$",
     command=("bot_users", plugin_category),
     info={
@@ -105,7 +105,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@petercord.bot_cmd(
+@kanjeng.bot_cmd(
     pattern=f"^/ban\s+(.*)",
     from_users=Config.OWNER_ID,
 )
@@ -131,7 +131,7 @@ async def ban_botpms(event):
     if check:
         return await event.client.send_message(
             event.chat_id,
-            f"#Already_banned\
+            f"**#Already_banned**\
             \nUser already exists in my Banned Users list.\
             \n**Reason For Bot BAN:** `{check.reason}`\
             \n**Date:** `{check.date}`.",
@@ -140,7 +140,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@petercord.bot_cmd(
+@kanjeng.bot_cmd(
     pattern=f"^/unban(?: |$)(.*)",
     from_users=Config.OWNER_ID,
 )
@@ -167,7 +167,7 @@ async def ban_botpms(event):
     await event.reply(msg)
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern=f"bblist$",
     command=("bblist", plugin_category),
     info={
@@ -187,7 +187,7 @@ async def ban_starters(event):
     await edit_or_reply(event, msg)
 
 
-@petercord.ilham_cmd(
+@kanjeng.alfareza_cmd(
     pattern=f"bot_antif (on|off)$",
     command=("bot_antif", plugin_category),
     info={
