@@ -2,7 +2,7 @@ import asyncio
 from datetime import datetime
 
 from ..core.managers import edit_or_reply
-from . import kanjeng, hmention
+from . import hmention, kanjeng
 
 plugin_category = "tools"
 
