@@ -3,7 +3,7 @@ from math import floor
 
 from telethon.utils import get_display_name
 
-from pyPetercord import petercord
+from pyKanjeng import kanjeng
 
 from ..Config import Config
 from ..core.logger import logging
@@ -44,7 +44,7 @@ async def get_user_and_reason(event):
     return user_id, reason
 
 
-# taken from https://github.com/code-rgb/USERGE-X/blob/f95766027ef95854d05e523b42cd158c2e8cdbd0/userge/plugins/bot/bot_forwards.py#L420
+# alfareza
 def progress_str(total: int, current: int) -> str:
     percentage = current * 100 / total
     prog_arg = "**Progress** : `{}%`\n" "```[{}{}]```"
@@ -66,14 +66,14 @@ async def ban_user_from_bot(user, reason, reply_to=None):
     banned_msg = (
         f"**You have been Banned Forever from using this bot.\nReason** : {reason}"
     )
-    await petercord.tgbot.send_message(user.id, banned_msg)
+    await kanjeng.tgbot.send_message(user.id, banned_msg)
     info = f"**#Banned_Bot_PM_User**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
             \n**First Name:** {user.first_name}\
             \n**User ID:** `{user.id}`\
             \n**Reason:** `{reason}`"
     if BOTLOG:
-        await petercord.send_message(BOTLOG_CHATID, info)
+        await kanjeng.send_message(BOTLOG_CHATID, info)
     return info
 
 
@@ -85,11 +85,11 @@ async def unban_user_from_bot(user, reason, reply_to=None):
     banned_msg = f"**You have been Unbanned from this bot. From now on you can send messages here to contact my master.**"
     if reason is not None:
         banned_msg += f"\n**Reason:** __{reason}__"
-    await petercord.tgbot.send_message(user.id, banned_msg)
+    await kanjeng.tgbot.send_message(user.id, banned_msg)
     info = f"**#Unbanned_Bot_PM_User**\
             \n\n👤 {_format.mentionuser(get_display_name(user) , user.id)}\
             \n**First Name:** {user.first_name}\
             \n**User ID:** `{user.id}`"
     if BOTLOG:
-        await petercord.send_message(BOTLOG_CHATID, info)
+        await kanjeng.send_message(BOTLOG_CHATID, info)
     return info
