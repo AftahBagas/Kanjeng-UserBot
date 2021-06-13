@@ -9,7 +9,7 @@ from telethon import Button, types
 from telethon.events import CallbackQuery, InlineQuery
 from youtubesearchpython import VideosSearch
 
-from pyPetercord import petercord
+from pyKanjeng import kanjeng
 
 from ..Config import Config
 from ..helpers.functions import rand_key
@@ -28,7 +28,7 @@ from .logger import logging
 LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
-PETERCORDLOGO = "https://telegra.ph/file/83e407a78cecc0af8adc8.jpg"
+PETERCORDLOGO = "https://telegra.ph/file/4723c482f2ce34a6ef32a.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -51,52 +51,52 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"𝗣𝗲𝘁𝗲𝗿𝗰𝗼𝗿𝗱𝗕𝗼𝘁 𝗦𝗲𝗹𝗮𝗺𝗮𝘁 𝗠𝗲𝗻𝗴𝗴𝘂𝗻𝗮𝗸𝗮𝗻\
-        \n𝗣𝗘𝗡𝗚𝗚𝗨𝗡𝗔 {mention}"
+    text = f"**Help Inline Menu**\
+        \n**Kanjeng** : {mention}"
     buttons = [
         (
             Button.inline(
-                f"ℹ️ Info",
+                f"Informasi",
                 data="check",
             ),
         ),
         (
             Button.inline(
-                f"🦍 Admin ({len(GRP_INFO['admin'])})",
+                f"Inline Admin ({len(GRP_INFO['admin'])})",
                 data=f"admin_menu",
             ),
             Button.inline(
-                f"🤖 Bot ({len(GRP_INFO['bot'])})",
+                f"Inline Bot ({len(GRP_INFO['bot'])})",
                 data=f"bot_menu",
             ),
         ),
         (
             Button.inline(
-                f"🎨 Fun ({len(GRP_INFO['fun'])})",
+                f"Inline Fun ({len(GRP_INFO['fun'])})",
                 data=f"fun_menu",
             ),
             Button.inline(
-                f"🧩 Misc ({len(GRP_INFO['misc'])})",
+                f"Inline Misc ({len(GRP_INFO['misc'])})",
                 data=f"misc_menu",
             ),
         ),
         (
             Button.inline(
-                f"🧰 Tools ({len(GRP_INFO['tools'])})",
+                f"Inline Tools ({len(GRP_INFO['tools'])})",
                 data=f"tools_menu",
             ),
             Button.inline(
-                f"🗂 Utils ({len(GRP_INFO['utils'])})",
+                f"Inline Utils ({len(GRP_INFO['utils'])})",
                 data=f"utils_menu",
             ),
         ),
         (
             Button.inline(
-                f"➕ Extra ({len(GRP_INFO['extra'])})",
+                f"Inline Extra ({len(GRP_INFO['extra'])})",
                 data=f"extra_menu",
             ),
             Button.inline(
-                f"🔒 Close Menu",
+                f"Close Menu",
                 data=f"close",
             ),
         ),
@@ -182,13 +182,13 @@ def paginate_help(
                 modulo_page * number_of_rows : number_of_rows * (modulo_page + 1)
             ] + [
                 (
-                    Button.inline("◀", data=f"{prefix}_prev({modulo_page})_plugin"),
-                    Button.inline("⚙️ Main Menu", data="mainmenu"),
-                    Button.inline("▶", data=f"{prefix}_next({modulo_page})_plugin"),
+                    Button.inline("<<", data=f"{prefix}_prev({modulo_page})_plugin"),
+                    Button.inline("Main Menu", data="mainmenu"),
+                    Button.inline(">>", data=f"{prefix}_next({modulo_page})_plugin"),
                 )
             ]
         else:
-            pairs = pairs + [(Button.inline("⚙️ Main Menu", data="mainmenu"),)]
+            pairs = pairs + [(Button.inline("Main Menu", data="mainmenu"),)]
     else:
         if len(pairs) > number_of_rows:
             pairs = pairs[
@@ -196,15 +196,15 @@ def paginate_help(
             ] + [
                 (
                     Button.inline(
-                        "◀",
+                        "<<",
                         data=f"{prefix}_prev({modulo_page})_command_{category_plugins}_{category_pgno}",
                     ),
                     Button.inline(
-                        "⏪ Back ",
+                        "<< Back ",
                         data=f"back_plugin_{category_plugins}_{category_pgno}",
                     ),
                     Button.inline(
-                        "▶",
+                        ">>",
                         data=f"{prefix}_next({modulo_page})_command_{category_plugins}_{category_pgno}",
                     ),
                 )
@@ -213,7 +213,7 @@ def paginate_help(
             pairs = pairs + [
                 (
                     Button.inline(
-                        "⏪ Back ",
+                        "<< Back ",
                         data=f"back_plugin_{category_plugins}_{category_pgno}",
                     ),
                 )
@@ -221,7 +221,7 @@ def paginate_help(
     return pairs
 
 
-@petercord.tgbot.on(InlineQuery)
+@kanjeng.tgbot.on(InlineQuery)
 async def inline_handler(event):  # sourcery no-metrics
     builder = event.builder
     result = None
@@ -234,31 +234,31 @@ async def inline_handler(event):  # sourcery no-metrics
     if query_user_id == Config.OWNER_ID or query_user_id in Config.SUDO_USERS:
         hmm = re.compile("secret (.*) (.*)")
         match = re.findall(hmm, query)
-        if query.startswith("**PetercordBot"):
+        if query.startswith("**Kanjeng Userbot"):
             buttons = [
                 (
                     Button.inline("Stats", data="stats"),
-                    Button.url("Repo", "https://github.com/IlhamMansiez/PetercordBot"),
+                    Button.url("Repo", "https://github.com/AftahBagas/Kanjeng-Userbot"),
                 )
             ]
-            PETERCORD_IMG = Config.ALIVE_PIC or None
-            if PETERCORD_IMG and PETERCORD_IMG.endswith((".jpg", ".png")):
+            KANJENG_IMG = Config.ALIVE_PIC or None
+            if KANJENG_IMG and KANJENG_IMG.endswith((".jpg", ".png")):
                 result = builder.photo(
-                    PETERCORD_IMG,
-                    # title="Alive PetercordBot",
+                    KANJENG_IMG,
+                    # title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
-            elif PETERCORD_IMG:
+            elif KANJENG_IMG:
                 result = builder.document(
-                    PETERCORD_IMG,
-                    title="Alive petercord",
+                    KANJENG_IMG,
+                    title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive petercord",
+                    title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
@@ -311,9 +311,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 try:
                     u = await event.client.get_entity(u)
                     if u.username:
-                        ilham = f"@{u.username}"
+                        alfareza = f"@{u.username}"
                     else:
-                        ilham = f"[{u.first_name}](tg://user?id={u.id})"
+                        alfareza = f"[{u.first_name}](tg://user?id={u.id})"
                 except ValueError:
                     # ValueError: Could not find the input entity
                     ilham = f"[user](tg://user?id={u})"
@@ -324,9 +324,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 except ValueError:
                     return
                 if u.username:
-                    ilham = f"@{u.username}"
+                    alfareza = f"@{u.username}"
                 else:
-                    ilham = f"[{u.first_name}](tg://user?id={u.id})"
+                    alfareza = f"[{u.first_name}](tg://user?id={u.id})"
                 u = int(u.id)
             except Exception:
                 return
@@ -336,7 +336,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [Button.inline("show message 🔐", data=f"secret_{timestamp}")]
             result = builder.article(
                 title="secret message",
-                text=f"🔒 A whisper message to {ilham}, Only he/she can open it.",
+                text=f"🔒 A whisper message to {alfareza}, Only he/she can open it.",
                 buttons=buttons,
             )
             await event.answer([result] if result else None)
@@ -348,8 +348,8 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help":
             _result = main_menu()
             result = builder.article(
-                title="© PetercordBot Help",
-                description="Help menu for PetercordBot",
+                title="© Kanjeng Userbot",
+                description="Help Menu Kanjeng Userbot",
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
@@ -418,7 +418,7 @@ async def inline_handler(event):  # sourcery no-metrics
             ]
             markup = event.client.build_reply_markup(buttons)
             photo = types.InputWebDocument(
-                url="https://imgur.com/gallery/ieSTXbM",
+                url="https://telegra.ph/file/4723c482f2ce34a6ef32a.jpg",
                 size=0,
                 mime_type="image/jpeg",
                 attributes=[],
@@ -441,25 +441,25 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 Button.inline(text="Show Options.", data="show_pmpermit_options"),
             ]
-            PETERCORD_IMG = gvarstatus("pmpermit_pic") or None
+            KANJENG_IMG = gvarstatus("pmpermit_pic") or None
             query = gvarstatus("pmpermit_text")
-            if PETERCORD_IMG and PETERCORD_IMG.endswith((".jpg", ".jpeg", ".png")):
+            if KANJENG_IMG and KANJENG_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
-                    PETERCORD_IMG,
-                    # title="Alive cat",
+                    KANJENG_IMG,
+                    # title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
-            elif PETERCORD_IMG:
+            elif KANJENG_IMG:
                 result = builder.document(
                     PETERCORD_IMG,
-                    title="Alive cat",
+                    title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
             else:
                 result = builder.article(
-                    title="Alive PetercordBot",
+                    title="Alive Kanjeng Userbot",
                     text=query,
                     buttons=buttons,
                 )
@@ -468,27 +468,27 @@ async def inline_handler(event):  # sourcery no-metrics
         buttons = [
             (
                 Button.url(
-                    "Source code", "https://github.com/IlhamMansiez/PetercordBot"
+                    "Source code", "https://github.com/AftahBagas/Kanjeng-Userbot"
                 ),
                 Button.url(
                     "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FIlhamMansiez%2FPetercordBot_&template=https%3A%2F%2Fgithub.com%2FIlhamMansiez%2FPETERCORDBOT_",
+                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FAftahbagas%2Fkanjeng-userbot_&template=https%3A%2F%2Fgithub.com%2Faftahbagas%2Fdeploykanjeng",
                 ),
             )
         ]
         markup = event.client.build_reply_markup(buttons)
         photo = types.InputWebDocument(
-            url=PETERCORDLOGO, size=0, mime_type="image/jpeg", attributes=[]
+            url=KANJENGLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "𝗗𝗲𝗽𝗹𝗼𝘆 𝐔𝐍𝐓𝐔𝐊  𝐏𝐞𝐭𝐞𝐫𝐜𝐨𝐫𝐝𝐁𝐨𝐭.", "md"
+            "**Deploy Kanjeng Userbot**", "md"
         )
         result = types.InputBotInlineResult(
             id=str(uuid4()),
             type="photo",
-            title="𝐏𝐞𝐭𝐞𝐫𝐜𝐨𝐫𝐝𝐁𝐨𝐭",
+            title="**Kanjeng Userbot**",
             description="Deploy yourself",
-            url="https://github.com/IlhamMansiez/PetercordBot",
+            url="https://github.com/AftahBagas/Kanjeng-Userbot",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(
@@ -498,16 +498,16 @@ async def inline_handler(event):  # sourcery no-metrics
         await event.answer([result] if result else None)
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(b"close")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     buttons = [
-        (Button.inline("Open Menu", data="mainmenu"),),
+        (Button.inline("Open Menu Help", data="mainmenu"),),
     ]
-    await event.edit("Menu Closed", buttons=buttons)
+    await event.edit("Menu Help Closed", buttons=buttons)
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(b"check")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"check")))
 async def on_plugin_callback_query_handler(event):
     text = f"𝙿𝚕𝚞𝚐𝚒𝚗𝚜: {len(PLG_INFO)}\
         \n𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜: {len(CMD_INFO)}\
@@ -518,7 +518,7 @@ async def on_plugin_callback_query_handler(event):
     await event.answer(text, cache_time=0, alert=True)
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(b"(.*)_menu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     category = str(event.pattern_match.group(1).decode("UTF-8"))
@@ -529,7 +529,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@petercord.tgbot.on(
+@kanjeng.tgbot.on(
     CallbackQuery(
         data=re.compile(b"back_([a-z]+)_([a-z]+)_([0-9]+)_?([a-z]+)?_?([0-9]+)?")
     )
@@ -561,14 +561,14 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(text, buttons=buttons)
 
 
-@petercord.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
+@kanjeng.tgbot.on(CallbackQuery(data=re.compile(rb"mainmenu")))
 @check_owner
 async def on_plug_in_callback_query_handler(event):
     _result = main_menu()
     await event.edit(_result[0], buttons=_result[1])
 
 
-@petercord.tgbot.on(
+@kanjeng.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_prev\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -599,7 +599,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@petercord.tgbot.on(
+@kanjeng.tgbot.on(
     CallbackQuery(data=re.compile(rb"(.*)_next\((.+?)\)_([a-z]+)_?([a-z]+)?_?(.*)?"))
 )
 @check_owner
@@ -627,7 +627,7 @@ async def on_plug_in_callback_query_handler(event):
     await event.edit(buttons=buttons)
 
 
-@petercord.tgbot.on(
+@kanjeng.tgbot.on(
     CallbackQuery(data=re.compile(b"(.*)_cmdhelp_([a-z]+)_([0-9]+)_([a-z]+)_([0-9]+)"))
 )
 @check_owner
@@ -640,10 +640,10 @@ async def on_plug_in_callback_query_handler(event):
     buttons = [
         (
             Button.inline(
-                "⬅️ Back ",
+                "<< Back ",
                 data=f"back_command_{category}_{pgno}_{category_plugins}_{category_pgno}",
             ),
-            Button.inline("⚙️ Main Menu", data="mainmenu"),
+            Button.inline("Main Menu", data="mainmenu"),
         )
     ]
     text = f"**Command :** `{tr}{cmd}`\
