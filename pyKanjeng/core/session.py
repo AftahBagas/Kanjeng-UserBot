@@ -4,7 +4,6 @@ from telethon.network.connection.tcpabridged import ConnectionTcpAbridged
 from telethon.sessions import StringSession
 
 from ..Config import Config
-from .client import PetercordBotClient
 
 __version__ = "2.10.6"
 
