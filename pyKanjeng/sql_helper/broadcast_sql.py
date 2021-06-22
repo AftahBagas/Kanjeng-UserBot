@@ -5,8 +5,8 @@ from sqlalchemy import Column, String, UnicodeText, distinct, func
 from . import BASE, SESSION
 
 
-class PetercordBroadcast(BASE):
-    __tablename__ = "petercordbroadcast"
+class KanjengBroadcast(BASE):
+    __tablename__ = "kanjengbroadcast"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String(14), primary_key=True, nullable=False)
 
@@ -15,22 +15,22 @@ class PetercordBroadcast(BASE):
         self.group_id = str(group_id)
 
     def __repr__(self):
-        return "<Petercord Broadcast channels '%s' for %s>" % (
+        return "<Kanjeng Broadcast channels '%s' for %s>" % (
             self.group_id,
             self.keywoard,
         )
 
     def __eq__(self, other):
         return bool(
-            isinstance(other, PetercordBroadcast)
+            isinstance(other, KanjengBroadcast)
             and self.keywoard == other.keywoard
             and self.group_id == other.group_id
         )
 
 
-PetercordBroadcast.__table__.create(checkfirst=True)
+KanjengBroadcast.__table__.create(checkfirst=True)
 
-PETERCORDBROADCAST_INSERTION_LOCK = threading.RLock()
+KANJENGBROADCAST_INSERTION_LOCK = threading.RLock()
 
 
 class BROADCAST_SQL:
@@ -42,8 +42,8 @@ BROADCAST_SQL_ = BROADCAST_SQL()
 
 
 def add_to_broadcastlist(keywoard, group_id):
-    with PETERCORDBROADCAST_INSERTION_LOCK:
-        broadcast_group = PetercoedBroadcast(keywoard, str(group_id))
+    with KANJENGBROADCAST_INSERTION_LOCK:
+        broadcast_group = KanjengBroadcast(keywoard, str(group_id))
 
         SESSION.merge(broadcast_group)
         SESSION.commit()
@@ -51,8 +51,8 @@ def add_to_broadcastlist(keywoard, group_id):
 
 
 def rm_from_broadcastlist(keywoard, group_id):
-    with PETERCORDBROADCAST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordBroadcast).get(
+    with KANJENGBROADCAST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(KanjengBroadcast).get(
             (keywoard, str(group_id))
         )
         if broadcast_group:
@@ -70,18 +70,18 @@ def rm_from_broadcastlist(keywoard, group_id):
 
 
 def is_in_broadcastlist(keywoard, group_id):
-    with PETERCORDBROADCAST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordBroadcast).get(
+    with KANJENGBROADCAST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(KanjengBroadcast).get(
             (keywoard, str(group_id))
         )
         return bool(broadcast_group)
 
 
 def del_keyword_broadcastlist(keywoard):
-    with PETERCORDBROADCAST_INSERTION_LOCK:
+    with KANJENGBROADCAST_INSERTION_LOCK:
         broadcast_group = (
-            SESSION.query(PetercordBroadcast.keywoard)
-            .filter(PetercordBroadcast.keywoard == keywoard)
+            SESSION.query(KanjengBroadcast.keywoard)
+            .filter(KanjengBroadcast.keywoard == keywoard)
             .delete()
         )
         BROADCAST_SQL_.BROADCAST_CHANNELS.pop(keywoard)
@@ -94,7 +94,7 @@ def get_chat_broadcastlist(keywoard):
 
 def get_broadcastlist_chats():
     try:
-        chats = SESSION.query(PetercordBroadcast.keywoard).distinct().all()
+        chats = SESSION.query(KanjengBroadcast.keywoard).distinct().all()
         return [i[0] for i in chats]
     finally:
         SESSION.close()
@@ -102,7 +102,7 @@ def get_broadcastlist_chats():
 
 def num_broadcastlist():
     try:
-        return SESSION.query(PetercordBroadcast).count()
+        return SESSION.query(KanjengBroadcast).count()
     finally:
         SESSION.close()
 
@@ -110,8 +110,8 @@ def num_broadcastlist():
 def num_broadcastlist_chat(keywoard):
     try:
         return (
-            SESSION.query(PetercordBroadcast.keywoard)
-            .filter(PetercordBroadcast.keywoard == keywoard)
+            SESSION.query(KanjengBroadcast.keywoard)
+            .filter(KanjengBroadcast.keywoard == keywoard)
             .count()
         )
     finally:
@@ -120,18 +120,18 @@ def num_broadcastlist_chat(keywoard):
 
 def num_broadcastlist_chats():
     try:
-        return SESSION.query(func.count(distinct(PetercordBroadcast.keywoard))).scalar()
+        return SESSION.query(func.count(distinct(KanjengBroadcast.keywoard))).scalar()
     finally:
         SESSION.close()
 
 
 def __load_chat_broadcastlists():
     try:
-        chats = SESSION.query(PetercordBroadcast.keywoard).distinct().all()
+        chats = SESSION.query(KanjengBroadcast.keywoard).distinct().all()
         for (keywoard,) in chats:
             BROADCAST_SQL_.BROADCAST_CHANNELS[keywoard] = []
 
-        all_groups = SESSION.query(PetercordBroadcast).all()
+        all_groups = SESSION.query(KanjengBroadcast).all()
         for x in all_groups:
             BROADCAST_SQL_.BROADCAST_CHANNELS[x.keywoard] += [x.group_id]
 
