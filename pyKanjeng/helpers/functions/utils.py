@@ -46,17 +46,17 @@ async def get_readable_time(seconds: int) -> str:
 # gban
 
 
-async def admin_groups(petercord):
-    petercordgroups = []
-    async for dialog in petercord.client.iter_dialogs():
+async def admin_groups(kanjeng):
+    kanjenggroups = []
+    async for dialog in kanjeng.client.iter_dialogs():
         entity = dialog.entity
         if (
             isinstance(entity, Channel)
             and entity.megagroup
             and (entity.creator or entity.admin_rights)
         ):
-            petercordgroups.append(entity.id)
-    return petercordgroups
+            kanjenggroups.append(entity.id)
+    return kanjenggroups
 
 
 # https://github.com/pokurt/LyndaRobot/blob/7556ca0efafd357008131fa88401a8bb8057006f/lynda/modules/helper_funcs/string_handling.py#L238
@@ -86,7 +86,7 @@ async def extract_time(petercord, time_val):
             )
             return None
         return bantime
-    await petercord.edit(
+    await kanjeng.edit(
         f"__Invalid time type specified. Expected s,  m , h , d or w but got: __{time_val[-1]}"
     )
     return None
