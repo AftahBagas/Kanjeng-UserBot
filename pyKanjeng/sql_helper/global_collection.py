@@ -5,8 +5,8 @@ from sqlalchemy import Column, PickleType, UnicodeText, distinct, func
 from . import BASE, SESSION
 
 
-class Petercord_GlobalCollection(BASE):
-    __tablename__ = "petercord_globalcollection"
+class Kanjeng_GlobalCollection(BASE):
+    __tablename__ = "kanjeng_globalcollection"
     keywoard = Column(UnicodeText, primary_key=True)
     contents = Column(PickleType, primary_key=True, nullable=False)
 
@@ -15,7 +15,7 @@ class Petercord_GlobalCollection(BASE):
         self.contents = tuple(contents)
 
     def __repr__(self):
-        return "<Petercord Global Collection lists '%s' for %s>" % (
+        return "<Kanjeng Global Collection lists '%s' for %s>" % (
             self.contents,
             self.keywoard,
         )
@@ -28,9 +28,9 @@ class Petercord_GlobalCollection(BASE):
         )
 
 
-Petercord_GlobalCollection.__table__.create(checkfirst=True)
+Kanjeng_GlobalCollection.__table__.create(checkfirst=True)
 
-PETERCORD_GLOBALCOLLECTION = threading.RLock()
+KANJENG_GLOBALCOLLECTION = threading.RLock()
 
 
 class COLLECTION_SQL:
@@ -42,7 +42,7 @@ COLLECTION_SQL_ = COLLECTION_SQL()
 
 
 def add_to_collectionlist(keywoard, contents):
-    with PETERCORD_GLOBALCOLLECTION:
+    with KANJENG_GLOBALCOLLECTION:
         keyword_items = Cat_GlobalCollection(keywoard, tuple(contents))
 
         SESSION.merge(keyword_items)
@@ -51,8 +51,8 @@ def add_to_collectionlist(keywoard, contents):
 
 
 def rm_from_collectionlist(keywoard, contents):
-    with PETERCORD_GLOBALCOLLECTION:
-        keyword_items = SESSION.query(Petercord_GlobalCollection).get(
+    with KANJENG_GLOBALCOLLECTION:
+        keyword_items = SESSION.query(Kanjeng_GlobalCollection).get(
             (keywoard, tuple(contents))
         )
         if keyword_items:
@@ -69,16 +69,16 @@ def rm_from_collectionlist(keywoard, contents):
 
 
 def is_in_collectionlist(keywoard, contents):
-    with PETERCORD_GLOBALCOLLECTION:
+    with KANJENG_GLOBALCOLLECTION:
         keyword_items = COLLECTION_SQL_.CONTENTS_LIST.get(keywoard, set())
         return any(tuple(contents) == list1 for list1 in keyword_items)
 
 
 def del_keyword_collectionlist(keywoard):
-    with PETERCORD_GLOBALCOLLECTION:
+    with KANJENG_GLOBALCOLLECTION:
         keyword_items = (
-            SESSION.query(Petercord_GlobalCollection.keywoard)
-            .filter(Petercord_GlobalCollection.keywoard == keywoard)
+            SESSION.query(Kanjeng_GlobalCollection.keywoard)
+            .filter(Kanjeng_GlobalCollection.keywoard == keywoard)
             .delete()
         )
         COLLECTION_SQL_.CONTENTS_LIST.pop(keywoard)
@@ -91,7 +91,7 @@ def get_item_collectionlist(keywoard):
 
 def get_collectionlist_items():
     try:
-        chats = SESSION.query(Petercord_GlobalCollection.keywoard).distinct().all()
+        chats = SESSION.query(Kanjeng_GlobalCollection.keywoard).distinct().all()
         return [i[0] for i in chats]
     finally:
         SESSION.close()
@@ -99,7 +99,7 @@ def get_collectionlist_items():
 
 def num_collectionlist():
     try:
-        return SESSION.query(Petercord_GlobalCollection).count()
+        return SESSION.query(Kanjeng_GlobalCollection).count()
     finally:
         SESSION.close()
 
@@ -107,8 +107,8 @@ def num_collectionlist():
 def num_collectionlist_item(keywoard):
     try:
         return (
-            SESSION.query(Petercord_GlobalCollection.keywoard)
-            .filter(Petercord_GlobalCollection.keywoard == keywoard)
+            SESSION.query(Kanjeng_GlobalCollection.keywoard)
+            .filter(Kanjeng_GlobalCollection.keywoard == keywoard)
             .count()
         )
     finally:
@@ -118,7 +118,7 @@ def num_collectionlist_item(keywoard):
 def num_collectionlist_items():
     try:
         return SESSION.query(
-            func.count(distinct(Petercord_GlobalCollection.keywoard))
+            func.count(distinct(Kanjeng_GlobalCollection.keywoard))
         ).scalar()
     finally:
         SESSION.close()
@@ -126,11 +126,11 @@ def num_collectionlist_items():
 
 def __load_item_collectionlists():
     try:
-        chats = SESSION.query(Petercord_GlobalCollection.keywoard).distinct().all()
+        chats = SESSION.query(Kanjeng_GlobalCollection.keywoard).distinct().all()
         for (keywoard,) in chats:
             COLLECTION_SQL_.CONTENTS_LIST[keywoard] = []
 
-        all_groups = SESSION.query(Petercord_GlobalCollection).all()
+        all_groups = SESSION.query(Kanjeng_GlobalCollection).all()
         for x in all_groups:
             COLLECTION_SQL_.CONTENTS_LIST[x.keywoard] += [x.contents]
 
