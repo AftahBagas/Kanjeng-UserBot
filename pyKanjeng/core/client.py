@@ -36,7 +36,7 @@ REGEX_ = REGEX()
 sudo_enabledcmds = sudo_enabled_cmds()
 
 
-class PetercordBotClient(TelegramClient):
+class KanjengBotClient(TelegramClient):
     def ilham_cmd(
         self: TelegramClient,
         pattern: str or tuple = None,
@@ -132,8 +132,8 @@ class PetercordBotClient(TelegramClient):
                         result = output[0] + output[1]
                         ftext += result
                         pastelink = paste_text(ftext)
-                        text = "**PetercordBot Error report**\n\n"
-                        link = "[Klik](https://t.me/TEAMSquadUserbotSupport)"
+                        text = "**Kanjeng Userbot Error report**\n\n"
+                        link = "[Klik](https://t.me/TeamSquadUserbotSupport)"
                         text += "If you wanna you can report it"
                         text += f"- just forward this message {link}.\n"
                         text += (
@@ -240,8 +240,8 @@ class PetercordBotClient(TelegramClient):
                         result = output[0] + output[1]
                         ftext += result
                         pastelink = paste_text(ftext)
-                        text = "**PetercordBot Error report**\n\n"
-                        link = "[Klik](https://t.me/TEAMSquadUserbotSupport)"
+                        text = "**Kanjeng Userbot Error report**\n\n"
+                        link = "[Klik](https://t.me/TeamSquadUserbotSupport)"
                         text += "If you wanna you can report it"
                         text += f"- just forward this message {link}.\n"
                         text += (
@@ -279,7 +279,7 @@ class PetercordBotClient(TelegramClient):
         self.running_processes.clear()
 
 
-PetercordBotClient.fast_download_file = download_file
-PetercordBotClient.fast_upload_file = upload_file
-PetercordBotClient.reload = restart_script
-PetercordBotClient.check_testcases = checking
+KanjengBotClient.fast_download_file = download_file
+KanjengBotClient.fast_upload_file = upload_file
+KanjengBotClient.reload = restart_script
+KanjengBotClient.check_testcases = checking
