@@ -115,9 +115,7 @@ def num_list_keyword(keywoard):
 
 def num_list_keywords():
     try:
-        return SESSION.query(
-            func.count(distinct(KanjengGloballist.keywoard))
-        ).scalar()
+        return SESSION.query(func.count(distinct(KanjengGloballist.keywoard))).scalar()
     finally:
         SESSION.close()
 
