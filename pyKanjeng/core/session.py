@@ -13,10 +13,10 @@ loop = None
 if Config.STRING_SESSION:
     session = StringSession(str(Config.STRING_SESSION))
 else:
-    session = "petercorduserbot"
+    session = "kanjenguserbot"
 
 try:
-    petercord = PetercordBotClient(
+    kanjeng = kanjengBotClient(
         session=session,
         api_id=Config.APP_ID,
         api_hash=Config.API_HASH,
@@ -31,8 +31,8 @@ except Exception as e:
     sys.exit()
 
 
-petercord.tgbot = tgbot = PetercordBotClient(
-    session="PetercordTgbot",
+kanjeng.tgbot = tgbot = kanjengBotClient(
+    session="kanjengTgbot",
     api_id=Config.APP_ID,
     api_hash=Config.API_HASH,
     loop=loop,
