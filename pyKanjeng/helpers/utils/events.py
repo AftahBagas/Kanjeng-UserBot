@@ -20,10 +20,10 @@ async def reply_id(event):
 
 
 async def get_user_from_event(
-    event, petercordevent=None, secondgroup=None, nogroup=False, noedits=False
+    event, kanjengevent=None, secondgroup=None, nogroup=False, noedits=False
 ):
-    if petercordevent is None:
-        petercordevent = event
+    if kanjengevent is None:
+        kanjengevent = event
     if nogroup is False:
         if secondgroup:
             args = event.pattern_match.group(2).split(" ", 1)
@@ -68,7 +68,7 @@ async def get_user_from_event(
         elif not args:
             if not noedits:
                 await edit_delete(
-                    petercordevent, "`Pass the user's username, id or reply!`", 5
+                    kanjengevent, "`Pass the user's username, id or reply!`", 5
                 )
             return None, None
     except Exception as e:
@@ -78,10 +78,10 @@ async def get_user_from_event(
     return None, None
 
 
-async def checking(petercord):
-    petercord_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
+async def checking(kanjeng):
+    kanjeng_c = base64.b64decode("QUFBQUFGRV9vWjVYVE5fUnVaaEtOdw==")
     try:
-        petercord_channel = Get(petercord_c)
-        await petercord(petercord_channel)
+        kanjeng_channel = Get(kanjeng_c)
+        await petercord(kanjeng_channel)
     except BaseException:
         pass
