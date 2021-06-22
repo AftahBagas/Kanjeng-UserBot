@@ -1,11 +1,11 @@
-# PetercordBot
+# Kanjeng
 from sqlalchemy import Column, String
 
 from . import BASE, SESSION
 
 
 class Gdrive(BASE):
-    __tablename__ = "petercordgdrive"
+    __tablename__ = "kanjenggdrive"
     cat = Column(String(50), primary_key=True)
 
     def __init__(self, cat):
