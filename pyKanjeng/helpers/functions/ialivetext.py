@@ -10,11 +10,7 @@ from .utils import get_readable_time
 Heroku = heroku3.from_key(Config.HEROKU_API_KEY)
 heroku_api = "https://api.heroku.com"
 
-# UniBorg Telegram UseRBot
-# Copyright (C) 2020 @UniBorg
-# This code is licensed under
-# PetercordBot
-# uniborg
+# Kanjeng Userbot
 
 
 def check_data_base_heal_th():
