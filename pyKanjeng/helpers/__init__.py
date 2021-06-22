@@ -1,5 +1,5 @@
 from . import fonts
-from . import memeshelper as petercordmemes
+from . import memeshelper as kanjengmemes
 from .aiohttp_helper import AioHttp
 from .utils import *
 
@@ -13,7 +13,7 @@ while flag:
         from .progress import *
         from .qhelper import process
         from .tools import *
-        from .utils import _format, _petercordtools, _petercordutils
+        from .utils import _format, _kanjengtools, _kanjengutils
 
         break
     except ModuleNotFoundError as e:
