@@ -95,7 +95,7 @@ async def cat_meme(CNG_FONTS, topString, bottomString, filename, endname):
     img.save(endname)
 
 
-async def petercord_meeme(upper_text, lower_text, CNG_FONTS, picture_name, endname):
+async def kanjeng_meeme(upper_text, lower_text, CNG_FONTS, picture_name, endname):
     main_image = petercordimage(filename=picture_name)
     main_image.resize(
         1024, int(((main_image.height * 1.0) / (main_image.width * 1.0)) * 1024.0)
