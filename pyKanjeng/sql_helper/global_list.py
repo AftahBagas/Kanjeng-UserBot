@@ -5,8 +5,8 @@ from sqlalchemy import Column, String, UnicodeText, distinct, func
 from . import BASE, SESSION
 
 
-class PetercordGloballist(BASE):
-    __tablename__ = "petercordgloballist"
+class KanjengGloballist(BASE):
+    __tablename__ = "kanjenggloballist"
     keywoard = Column(UnicodeText, primary_key=True)
     group_id = Column(String(14), primary_key=True, nullable=False)
 
@@ -19,15 +19,15 @@ class PetercordGloballist(BASE):
 
     def __eq__(self, other):
         return bool(
-            isinstance(other, PetercordGloballist)
+            isinstance(other, KanjengGloballist)
             and self.keywoard == other.keywoard
             and self.group_id == other.group_id
         )
 
 
-PetercordGloballist.__table__.create(checkfirst=True)
+KanjengGloballist.__table__.create(checkfirst=True)
 
-PETERCORDGLOBALLIST_INSERTION_LOCK = threading.RLock()
+KANJENGGLOBALLIST_INSERTION_LOCK = threading.RLock()
 
 
 class GLOBALLIST_SQL:
@@ -39,16 +39,16 @@ GLOBALLIST_SQL_ = GLOBALLIST_SQL()
 
 
 def add_to_list(keywoard, group_id):
-    with PETERCORDGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = PetercordGloballist(keywoard, str(group_id))
+    with KANJENGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = KanjengGloballist(keywoard, str(group_id))
         SESSION.merge(broadcast_group)
         SESSION.commit()
         GLOBALLIST_SQL_.GLOBALLIST_VALUES.setdefault(keywoard, set()).add(str(group_id))
 
 
 def rm_from_list(keywoard, group_id):
-    with PETERCORDGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordGloballist).get(
+    with KANJENGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(KanjengGloballist).get(
             (keywoard, str(group_id))
         )
         if broadcast_group:
@@ -65,18 +65,18 @@ def rm_from_list(keywoard, group_id):
 
 
 def is_in_list(keywoard, group_id):
-    with PETERCORDGLOBALLIST_INSERTION_LOCK:
-        broadcast_group = SESSION.query(PetercordGloballist).get(
+    with KANJENGGLOBALLIST_INSERTION_LOCK:
+        broadcast_group = SESSION.query(KanjengGloballist).get(
             (keywoard, str(group_id))
         )
         return bool(broadcast_group)
 
 
 def del_keyword_list(keywoard):
-    with PETERCORDGLOBALLIST_INSERTION_LOCK:
+    with KANJENGGLOBALLIST_INSERTION_LOCK:
         broadcast_group = (
-            SESSION.query(PetercordGloballist.keywoard)
-            .filter(PetercordGloballist.keywoard == keywoard)
+            SESSION.query(KanjengGloballist.keywoard)
+            .filter(KanjengGloballist.keywoard == keywoard)
             .delete()
         )
         GLOBALLIST_SQL_.GLOBALLIST_VALUES.pop(keywoard)
@@ -89,7 +89,7 @@ def get_collection_list(keywoard):
 
 def get_list_keywords():
     try:
-        chats = SESSION.query(PetercordGloballist.keywoard).distinct().all()
+        chats = SESSION.query(KanjengGloballist.keywoard).distinct().all()
         return [i[0] for i in chats]
     finally:
         SESSION.close()
@@ -97,7 +97,7 @@ def get_list_keywords():
 
 def num_list():
     try:
-        return SESSION.query(PetercordGloballist).count()
+        return SESSION.query(KanjengGloballist).count()
     finally:
         SESSION.close()
 
@@ -105,8 +105,8 @@ def num_list():
 def num_list_keyword(keywoard):
     try:
         return (
-            SESSION.query(PetercordGloballist.keywoard)
-            .filter(PetercordGloballist.keywoard == keywoard)
+            SESSION.query(KanjengGloballist.keywoard)
+            .filter(KanjengGloballist.keywoard == keywoard)
             .count()
         )
     finally:
@@ -116,7 +116,7 @@ def num_list_keyword(keywoard):
 def num_list_keywords():
     try:
         return SESSION.query(
-            func.count(distinct(PetercordGloballist.keywoard))
+            func.count(distinct(KanjengGloballist.keywoard))
         ).scalar()
     finally:
         SESSION.close()
@@ -124,11 +124,11 @@ def num_list_keywords():
 
 def __load_chat_lists():
     try:
-        chats = SESSION.query(PetercordGloballist.keywoard).distinct().all()
+        chats = SESSION.query(KanjengGloballist.keywoard).distinct().all()
         for (keywoard,) in chats:
             GLOBALLIST_SQL_.GLOBALLIST_VALUES[keywoard] = []
 
-        all_groups = SESSION.query(PetercordGloballist).all()
+        all_groups = SESSION.query(KanjengGloballist).all()
         for x in all_groups:
             GLOBALLIST_SQL_.GLOBALLIST_VALUES[x.keywoard] += [x.group_id]
 
