@@ -20,7 +20,7 @@ def check_owner(func):
                 pass
         else:
             await c_q.answer(
-                "Only My Master can Access This !!\n\nDeploy sendiri PetercordBot.",
+                "Only My Master can Access This !!\n\nDeploy Kanjeng Userbot Mu Sendiri.",
                 alert=True,
             )
 
